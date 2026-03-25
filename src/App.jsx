@@ -18,8 +18,15 @@ function App() {
   const[formData, setFormData] = useState({title: '', status:'todo'})
   console.log(tasks)
 
-  const handleSubmit =(e) =>{
+  const handleSubmit = (e) => {
     e.preventDefault()
+    const newTask = {
+      id: crypto.randomUUID(),
+      title: formData.title,
+      status: formData.status,
+    }
+    setTasks([...tasks, newTask])
+    setFormData({ title: '', status: 'todo' })
   }
 
   return (
@@ -45,13 +52,18 @@ function App() {
             </select>
               
 
-
+            <button type="submit">Add Task</button>
           </form>
       </section>
 
       <section> 
         <h2> Tasks ({tasks.length}) </h2>
-        <p>List of tasks will go here </p>
+        {tasks.map(task => (
+          <div key={task.id}>
+            <p>{task.title}</p>
+            <p>{task.status}</p>
+          </div>
+        ))}
       </section>
     </div>
   )
