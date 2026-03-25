@@ -6,16 +6,10 @@ import './App.css'
 
 function App() {
   
-  const [tasks, setTasks] = useState([
-    {
-      id: '1',
-      title: 'Test Task',
-      status: 'todo',
-    }
+  const [tasks, setTasks] = useState([])
 
-  ])
+  const[formData, setFormData] = useState({title: '', status:''})
 
-  const[formData, setFormData] = useState({title: '', status:'todo'})
   console.log(tasks)
 
   const handleSubmit = (e) => {
@@ -26,7 +20,7 @@ function App() {
       status: formData.status,
     }
     setTasks([...tasks, newTask])
-    setFormData({ title: '', status: 'todo' })
+    setFormData({ title: '', status: '' })
   }
 
   return (
