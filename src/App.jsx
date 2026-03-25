@@ -23,6 +23,10 @@ function App() {
     setFormData({ title: '', status: 'todo' })
   }
 
+  const handleDelete = (id) =>{
+    setTasks(tasks.filter(task => task.id !== id))
+  }
+
   return (
     <div>
       <h1>Tasks Tracker</h1>
