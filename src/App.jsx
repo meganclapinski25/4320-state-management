@@ -7,9 +7,7 @@ import TaskForm from './components/TaskForm'
 function App() {
   
   const [tasks, setTasks] = useState([])
-
   const[formData, setFormData] = useState({title: '', status:'todo'})
-
   const [editingId, setEditingId] = useState(null)
 
   console.log(tasks)
@@ -17,11 +15,14 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (editingId) {
-      setTasks(tasks.map(task =>
-        task.id === editingId
-          ? { ...task, title: formData.title, status: formData.status }
-          : task
-      ))
+      const updatedTasks = tasks.map((task) => {
+        if (task.id === editingId) {
+          return { ...task, title: formData.title, status: formData.status }
+        }
+        return task
+      })
+  
+      setTasks(updatedTasks)
       setEditingId(null)
     }else{
       const newTask = {
