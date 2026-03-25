@@ -10,21 +10,39 @@ function App() {
 
   const[formData, setFormData] = useState({title: '', status:'todo'})
 
+  const [editingId, setEditingId] = useState(null)
+
   console.log(tasks)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    const newTask = {
-      id: crypto.randomUUID(),
-      title: formData.title,
-      status: formData.status,
+    if (editingId) {
+      setTasks(tasks.map(task =>
+        task.id === editingId
+          ? { ...task, title: formData.title, status: formData.status }
+          : task
+      ))
+      setEditingId(null)
+    }else{
+      const newTask = {
+        id: crypto.randomUUID(),
+        title: formData.title,
+        status: formData.status,
+      }
+      setTasks([...tasks, newTask])
     }
-    setTasks([...tasks, newTask])
+    
+
     setFormData({ title: '', status: 'todo' })
   }
 
   const handleDelete = (id) =>{
     setTasks(tasks.filter(task => task.id !== id))
+  }
+
+  const handleEdit = (task) => {
+    setEditingId(task.id)
+    setFormData({ title: task.title, status: task.status })
   }
 
   return (
@@ -61,6 +79,7 @@ function App() {
             <p>{task.title}</p>
             <p>{task.status}</p>
             <button onClick={() => handleDelete(task.id)}>Delete</button>
+            <button onClick={() => handleEdit(task)}>Edit</button>
           </div>
           
         ))}
