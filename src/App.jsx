@@ -17,13 +17,17 @@ function App() {
 
   return (
     <div>
-      <h1>Tasks ({tasks.length})</h1>
-      {tasks.map(task => (
-        <div key={task.id}>
-          <p>{task.title}</p>
-          <p>{task.status}</p>
-        </div>
-      ))}
+      <h1>Tasks Tracker</h1>
+      
+      <section>
+          <h2> Add a Task</h2>
+          <p>Form will go here</p>
+      </section>
+
+      <section> 
+        <h2> Tasks (0) </h2>
+        <p>List of tasks will go here </p>
+      </section>
     </div>
   )
   
