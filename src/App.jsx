@@ -8,7 +8,7 @@ function App() {
   
   const [tasks, setTasks] = useState([])
 
-  const[formData, setFormData] = useState({title: '', status:''})
+  const[formData, setFormData] = useState({title: '', status:'todo'})
 
   console.log(tasks)
 
@@ -20,7 +20,7 @@ function App() {
       status: formData.status,
     }
     setTasks([...tasks, newTask])
-    setFormData({ title: '', status: '' })
+    setFormData({ title: '', status: 'todo' })
   }
 
   return (
@@ -53,7 +53,7 @@ function App() {
       <section> 
         <h2> Tasks ({tasks.length}) </h2>
         {tasks.map(task => (
-          <div key={task.id}>
+          <div key={task.id} className="task-item">
             <p>{task.title}</p>
             <p>{task.status}</p>
           </div>
