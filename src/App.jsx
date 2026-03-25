@@ -60,7 +60,9 @@ function App() {
           <div key={task.id} className="task-item">
             <p>{task.title}</p>
             <p>{task.status}</p>
+            <button onClick={() => handleDelete(task.id)}>Delete</button>
           </div>
+          
         ))}
       </section>
     </div>
