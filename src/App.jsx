@@ -28,7 +28,7 @@ function App() {
       </section>
 
       <section> 
-        <h2> Tasks (tasks.length) </h2>
+        <h2> Tasks ({tasks.length}) </h2>
         <p>List of tasks will go here </p>
       </section>
     </div>
