@@ -3,8 +3,8 @@ function TaskForm({ formData, setFormData, handleSubmit, editingId }) {
       <section>
         <h1>Tasks Tracker</h1>
       
-        <section>
-            <h2> Add a Task</h2>
+        <section className={editingId ? 'editing' : ''}>
+            <h2>{editingId ? 'Edit Task' : 'Add a Task'}</h2>
             <form onSubmit={handleSubmit}>
                 <input
                 type="text"
@@ -22,7 +22,7 @@ function TaskForm({ formData, setFormData, handleSubmit, editingId }) {
                 </select>
                 
 
-                <button type="submit">Add Task</button>
+                <button type="submit">{editingId ? 'Update Task' : 'Add Task'}</button>
             </form>
         </section>
       </section>

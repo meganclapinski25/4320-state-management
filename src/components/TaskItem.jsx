@@ -3,8 +3,8 @@ function TaskItem({ task, onDelete, onEdit }) {
       <div className="task-item">
         <p>{task.title}</p>
         <p>{task.status}</p>
-        <button onClick={() => onDelete(task.id)}>Delete</button>
-        <button onClick={() => onEdit(task)}>Edit</button>
+        <button className="delete-btn" onClick={() => onDelete(task.id)}>Delete</button>
+        <button className="edit-btn" onClick={() => onEdit(task)}>Edit</button>
       </div>
     )
   }

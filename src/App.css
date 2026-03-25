@@ -6,7 +6,7 @@
 
 body {
   font-family: 'Georgia', serif;
-  background: #f0ece2;
+  background: #ffffff;
   color: #2c2c2c;
   padding: 2rem;
 }
@@ -33,8 +33,8 @@ h2 {
 }
 
 section {
-  background: #fffdf7;
-  border: 1px solid #ccc;
+  background: #ffffff;
+  border: 2px solid #000000;
   border-radius: 4px;
   padding: 1.5rem;
   margin-bottom: 1.5rem;
@@ -94,4 +94,38 @@ button:hover {
 .task-item button:hover {
   background: #2c2c2c;
   color: #fff;
+}
+
+section.editing {
+  border-color: #2563eb;
+}
+
+.task-item .delete-btn {
+  border-color: red;
+  color: red;
+}
+
+.task-item .delete-btn:hover {
+  background: red;
+  color: white;
+}
+
+.task-item .edit-btn {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.task-item .edit-btn:hover {
+  background: #2563eb;
+  color: white;
+}
+
+button[type="submit"] {
+  background: #2c2c2c;
+  color: white;
+}
+
+button[type="submit"].editing {
+  background: #2563eb;
+  color: white;
 }
