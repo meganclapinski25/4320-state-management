@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-
+import TaskItem from './components/TaskItem'
 
 
 
@@ -75,13 +75,12 @@ function App() {
       <section> 
         <h2> Tasks ({tasks.length}) </h2>
         {tasks.map(task => (
-          <div key={task.id} className="task-item">
-            <p>{task.title}</p>
-            <p>{task.status}</p>
-            <button onClick={() => handleDelete(task.id)}>Delete</button>
-            <button onClick={() => handleEdit(task)}>Edit</button>
-          </div>
-          
+          <TaskItem
+            key={task.id}
+            task={task}
+            onDelete={handleDelete}
+            onEdit={handleEdit}
+          />
         ))}
       </section>
     </div>
