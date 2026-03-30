@@ -51,6 +51,8 @@ function App() {
     setFormData({title: '', status: 'todo'})
   }
 
+  const compCount = tasks.filter(task => task.status === 'done').length
+
   return (
     <div>
       <TaskForm
@@ -72,6 +74,7 @@ function App() {
           />
         ))}
       </section>
+      <p>{compCount} of {tasks.length} tasks completed</p>
     </div>
   )
   
