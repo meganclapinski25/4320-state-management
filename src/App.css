@@ -45,3 +45,21 @@ section.editing{
 section.h2{
   color:#2563eb;
 }
+
+form{
+  display: flex;
+  flex-direction: column;
+  gap:0.75px;
+}
+
+input, select{
+  font-family: 'Georgia', serif;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #fff;
+  width: 100%;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: #1a1a1a;
+}
