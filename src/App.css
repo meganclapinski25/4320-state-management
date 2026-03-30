@@ -8,10 +8,40 @@ body {
   font-family: 'Georgia', serif;
   background: #f8f8f8;
   color: #1a1a1a;
-  padding: 2rem;
+  padding: 2px;
 }
 
 #root {
   max-width: 700px;
   margin: 0 auto;
 } 
+h1{
+  font-size:2rem;
+  text-align: center;
+  border-bottom: 2px solid #1a1a1a;
+  padding-bottom: 1px;
+}
+
+h2{
+  text-transform: uppercase;
+  margin-bottom: 1.5px;
+  color: #444;
+}
+
+section{
+  background: #ffffff;
+  border: 2px solid #1a1a1a;
+  border-radius: 6px;
+  padding:1.5px;
+  margin-bottom: 1.5px;
+}
+
+section.editing{
+  border-color: #2563eb;
+  background:#eff6ff;
+
+}
+
+section.h2{
+  color:#2563eb;
+}
