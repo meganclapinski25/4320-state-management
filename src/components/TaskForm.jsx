@@ -1,4 +1,4 @@
-function TaskForm({ formData, setFormData, handleSubmit, editingId }) {
+function TaskForm({ formData, setFormData, handleSubmit, editingId, onCancel}) {
     return (
       <section>
         <h1>Tasks Tracker</h1>
@@ -23,6 +23,11 @@ function TaskForm({ formData, setFormData, handleSubmit, editingId }) {
                 
 
                 <button type="submit">{editingId ? 'Update Task' : 'Add Task'}</button>
+
+                {editingId && (
+                  <button type="button" onClick={onCancel}>Cancel</button>
+                )}
+
             </form>
         </section>
       </section>

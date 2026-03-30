@@ -46,6 +46,11 @@ function App() {
     setFormData({ title: task.title, status: task.status })
   }
 
+  const handleCancel = () => {
+    setEditingId(null)
+    setFormData({title: '', status: 'todo'})
+  }
+
   return (
     <div>
       <TaskForm
@@ -53,6 +58,7 @@ function App() {
         setFormData={setFormData}
         handleSubmit={handleSubmit}
         editingId={editingId}
+        onCancel={handleCancel}
       />
 
       <section> 
