@@ -32,6 +32,10 @@ function TaskNew({onCreate}){
                     <option value = "done">Done</option>
                 </select>
 
+                <button type="submit">Save Task</button>
+                <button type="button" onClick ={handleCancel}>Cancel</button>
+                
+
 
             </form>
                 
