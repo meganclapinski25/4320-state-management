@@ -23,6 +23,16 @@ function TaskNew({onCreate}){
                 {error && <p>{error}</p>}
 
 
+                <select
+                    value={formData.status}
+                    onChange={(e) => setFormData({...formData, status:e.target.value})}
+                >
+                    <option value = "todo">Todo</option>
+                    <option value = "doing">Doing</option>
+                    <option value = "done">Done</option>
+                </select>
+
+
             </form>
                 
 
