@@ -5,10 +5,28 @@ function TaskNew({onCreate}){
 
 
     const navigate = useNavigate()
+    const [formData, setFormData] = useState({title: '', status: 'todo'})
+    const [error, setError] = useState('')
     
-
+    
     return(
-        
+        <div>
+            <h1> Create Task</h1>
+            <form onSubmit ={handleSubmit}>
+                <input
+                    type = "text"
+                    placeholder='Task Title'
+                    value={formData.title}
+                    onChange={(e) => setFormData({...formData, title: e.target.value})}
+                    />
+
+                {error && <p>{error}</p>}
+
+
+            </form>
+                
+
+        </div>
     )
 }
 
