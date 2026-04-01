@@ -26,6 +26,13 @@ function TaskNew({onCreate}){
             updatedAt: new Date().toISOString(),
         }
 
+        onCreate(newTask)
+        navigate('/tasks')
+
+    }
+
+    const handleCancel =()=>{
+        navigate('/tasks')
     }
 
 
