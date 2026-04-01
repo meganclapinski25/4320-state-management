@@ -15,8 +15,17 @@ function TaskNew({onCreate}){
         if (formData.title.length <3 || formData.title.length>60){
             setError('Title must be between 3 and 60 chars')
             return
-        }
         
+        }
+
+        const newTask ={
+            id: crypto.randomUUID(),
+            title: formData.title,
+            status: formData.status,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+        }
+
     }
 
 
