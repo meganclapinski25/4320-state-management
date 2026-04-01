@@ -9,6 +9,18 @@ function TaskNew({onCreate}){
     const [error, setError] = useState('')
     
     
+    const handleSubmit = (e) => {
+        e.preventDedault()
+
+        if (formData.title.length <3 || formData.title.length>60){
+            setError('Title must be between 3 and 60 chars')
+            return
+        }
+        
+    }
+
+
+
     return(
         <div>
             <h1> Create Task</h1>
@@ -34,7 +46,7 @@ function TaskNew({onCreate}){
 
                 <button type="submit">Save Task</button>
                 <button type="button" onClick ={handleCancel}>Cancel</button>
-                
+
 
 
             </form>
