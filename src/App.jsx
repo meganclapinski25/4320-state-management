@@ -1,13 +1,16 @@
 import { useState } from 'react'
 import './App.css'
-import TaskItem from './components/TaskItem'
-import TaskForm from './components/TaskForm'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import TaskList from './pages/TaskList'
 
 
 function App() {
   
   const [tasks, setTasks] = useState([])
   
+  const deleteTask = (id) =>{
+    setTasks(tasks.filter(task =>task.id !==id))
+  }
 
   return (
    <Routes>
