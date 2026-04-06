@@ -18,6 +18,10 @@ function App() {
     setTasks([...tasks,task])
   }
 
+  const updatedTask = ()=>{
+    
+  }
+
   return (
    <Routes>
     <Route path ="/" element={<Navigate to="/tasks" replace/> }/>
