@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import TaskList from './pages/TaskList'
 import TaskNew from './pages/TaskNew'
+import TaskDetail from './pages/TaskDetail'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
     <Route path ="/" element={<Navigate to="/tasks" replace/> }/>
     <Route path="/tasks" element={<TaskList tasks={tasks} onDelete={deleteTask} />} />
     <Route path="/tasks/new" element={<TaskNew onCreate={addTask} />} />
+    <Route path="/tasks/:id" element={<TaskDetail tasks={tasks} onUpdate={updateTask} onDelete={deleteTask}/>}/>
    </Routes>
   )
   
