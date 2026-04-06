@@ -10,7 +10,7 @@ function TaskNew({onCreate}){
     
     
     const handleSubmit = (e) => {
-        e.preventDedault()
+        e.preventDefault()
 
         if (formData.title.length <3 || formData.title.length>60){
             setError('Title must be between 3 and 60 chars')
