@@ -9,10 +9,20 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
     const { id } = useParams()
 
     const task = tasks.find(t=>t.id === id)
+
+    if(!task){
+        return(
+            <div>
+                <h2>Task not Found</h2>
+                <Link to="/tasks">Return to task list</Link>
+            </div>
+        )
+    }
     
 
     return(
         <div>
+            <Link to="/tasks">Back</Link>
             <h1>{task.title}</h1>
             <p>Status: {task.status}</p>
             <p>Created: {task.createdAt}</p>
