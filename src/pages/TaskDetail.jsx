@@ -60,14 +60,19 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
                     <button onClick={() => setIsEditing(false)}>Cancel</button>
                 </div>
 
-            )}
-            <h1>{task.title}</h1>
-            <p>Status: {task.status}</p>
-            <p>Created: {task.createdAt}</p>
-            <p>Updated: {task.updatedAt}</p>
+            ):(
+                <div>
+                     <h1>{task.title}</h1>
+                        <p>Status: {task.status}</p>
+                        <p>Created: {task.createdAt}</p>
+                        <p>Updated: {task.updatedAt}</p>
 
-            <button onClick={()=>{onDelete(task.id); navigate('/tasks')}}>Delete</button>
+                        <button onClick={()=>{onDelete(task.id); navigate('/tasks')}}>Delete</button>
+                </div>
+            )
+           
         </div>
+        
     )
 }
 
