@@ -36,6 +36,31 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
     return(
         <div>
             <Link to="/tasks">Back</Link>
+
+            {isEditing ? (
+                <div>
+                    <input
+                     type="text"
+                     value={formData.title}
+                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+                    />
+                     <select
+                        value={formData.status}
+                        onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                    >
+                        <option value="todo">Todo</option>
+                        <option value="doing">Doing</option>
+                        <option value="done">Done</option>
+
+
+
+                    </select>
+
+                    <button onClick={handleSave}>Save</button>
+                    <button onClick={() => setIsEditing(false)}>Cancel</button>
+                </div>
+
+            )}
             <h1>{task.title}</h1>
             <p>Status: {task.status}</p>
             <p>Created: {task.createdAt}</p>
