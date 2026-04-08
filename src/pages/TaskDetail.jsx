@@ -18,7 +18,7 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
         return(
             <div>
                 <h2>Task not Found</h2>
-                <Link to="/tasks">Return to task list</Link>
+                <Link to="/tasks" className="btn-link">Return to task list</Link>
             </div>
         )
     }
@@ -35,7 +35,7 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
 
     return(
         <div>
-            <Link to="/tasks">Back</Link>
+            <Link to="/tasks" className= "btn-link">Back</Link>
 
             {isEditing ? (
                 <div>
@@ -66,8 +66,10 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
                         <p>Status: {task.status}</p>
                         <p>Created: {task.createdAt}</p>
                         <p>Updated: {task.updatedAt}</p>
-                        <button onClick={() => setIsEditing(true)}>Edit</button>
-                        <button onClick={()=>{onDelete(task.id); navigate('/tasks')}}>Delete</button>
+                        <div style={{display:'flex', gap: '0.75rem', marginTop: '1rem', alignItems:'center', justifyContent: 'center'  }}>
+                            <button onClick={() => setIsEditing(true)} className="edit-btn">Edit</button>
+                            <button onClick={()=>{onDelete(task.id); navigate('/tasks')}} className="delete-btn ">Delete</button>
+                        </div>
                 </div>
             )}
            

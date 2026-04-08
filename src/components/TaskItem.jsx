@@ -7,7 +7,7 @@ function TaskItem({ task, onDelete }) {
         <p>{task.title}</p>
         <p>{task.status}</p>
         <button className="delete-btn" onClick={() => onDelete(task.id)}>Delete</button>
-        <Link to={`/tasks/${task.id}`}>View / Edit</Link>
+        <Link to={`/tasks/${task.id}`} className="edit-btn"> Edit</Link>
       </div>
     )
   }
