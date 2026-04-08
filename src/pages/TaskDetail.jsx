@@ -10,6 +10,10 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
 
     const task = tasks.find(t=>t.id === id)
 
+
+    const [isEditing, setIsEditing] = useState(false)
+    const [formData, setFormData] = useState ({title: task?.title || '', status: task?.status || "todo"})
+    
     if(!task){
         return(
             <div>
