@@ -66,10 +66,10 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
                         <p>Status: {task.status}</p>
                         <p>Created: {task.createdAt}</p>
                         <p>Updated: {task.updatedAt}</p>
-
+                        <button onClick={() => setIsEditing(true)}>Edit</button>
                         <button onClick={()=>{onDelete(task.id); navigate('/tasks')}}>Delete</button>
                 </div>
-            )
+            )}
            
         </div>
         
