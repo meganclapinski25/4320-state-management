@@ -1,10 +1,13 @@
-function TaskItem({ task, onDelete, onEdit }) {
+import { Link } from "react-router-dom"
+
+
+function TaskItem({ task, onDelete }) {
     return (
       <div className="task-item">
         <p>{task.title}</p>
         <p>{task.status}</p>
         <button className="delete-btn" onClick={() => onDelete(task.id)}>Delete</button>
-        <button className="edit-btn" onClick={() => onEdit(task)}>Edit</button>
+        <Link to={`/tasks/${task.id}`}>View / Edit</Link>
       </div>
     )
   }

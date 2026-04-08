@@ -18,8 +18,8 @@ function App() {
     setTasks([...tasks,task])
   }
 
-  const updatedTask = ()=>{
-    
+  const updateTask = (updatedTask)=>{
+    setTasks(tasks.map(task => task.id === updatedTask.id ? updatedTask: task))
   }
 
   return (
