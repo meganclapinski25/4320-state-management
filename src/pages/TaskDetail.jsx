@@ -23,6 +23,15 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
         )
     }
     
+    const handleSave = () =>{
+        onUpdate({
+            ...task,
+            title:formData.title,
+            status:formData.status,
+            updatedAt: new Date().toISOString()
+        })
+        setIsEditing(false)
+    }
 
     return(
         <div>
