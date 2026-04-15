@@ -7,7 +7,7 @@ const tasksSlice = createSlice({
         
         
         addTask(state,action){
-            StaticRouter.pus(action.payload)
+            state.push(action.payload)
         },
 
 
@@ -21,9 +21,9 @@ const tasksSlice = createSlice({
     }
 })
 
-export const selectAllTasks
+export const selectAllTasks = (state) => state.tasks
 
-export const selectTaskById
+export const selectTaskById = (id) => (state) => state.tasks.find(t => t.id === id)
 
 
 export const {addTask, deleteTask, updateTask} = tasksSlice.actions
