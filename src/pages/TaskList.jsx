@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom'
 import TaskItem from '../components/TaskItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteTask, selectAllTasks } from '../store/tasksSlice'
 
-function TaskList({tasks, onDelete}) {
+function TaskList() {
+
+  const tasks = useSelector(selectAllTasks)
+  const dispatch = useDispatch()
+
+  const handleDelete = (id) =>{
+    dispatch(deleteTask(id))
+  }
 
   return(
     <div>
@@ -9,7 +18,7 @@ function TaskList({tasks, onDelete}) {
        <h2>Amount of Tasks {tasks.length}</h2>
        <Link to= "/tasks/new" className="btn-link">New Task</Link>
        {tasks.map(task => (
-          <TaskItem key={task.id} task={task} onDelete={onDelete}/>
+          <TaskItem key={task.id} task={task} onDelete={handleDelete}/>
         ))}
     </div>
    
