@@ -21,6 +21,11 @@ const tasksSlice = createSlice({
     }
 })
 
+export const selectAllTasks
+
+export const selectTaskById
+
+
 export const {addTask, deleteTask, updateTask} = tasksSlice.actions
 
 
