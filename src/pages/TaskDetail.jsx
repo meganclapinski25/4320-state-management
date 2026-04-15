@@ -58,16 +58,19 @@ function TaskDetail (){
 
                     </select>
 
-                    <button onClick={handleSave}>Save</button>
-                    <button onClick={() => setIsEditing(false)}>Cancel</button>
+                    <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                        <button onClick={handleSave}>Save</button>
+                        <button onClick={() => setIsEditing(false)}>Cancel</button>
+                    </div>
+
                 </div>
 
             ):(
                 <div>
                      <h1>{task.title}</h1>
                         <p>Status: {task.status}</p>
-                        <p>Created: {task.createdAt}</p>
-                        <p>Updated: {task.updatedAt}</p>
+                        <p>Created: {new Date(task.createdAt).toLocaleString('en-US', {timeZone:'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short'})}</p>
+                        <p>Updated: {new Date(task.updatedAt).toLocaleString('en-US', {timeZone:'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short'})}</p>
                         <div style={{display:'flex', gap: '0.75rem', marginTop: '1rem', alignItems:'center', justifyContent: 'center'  }}>
                             <button onClick={() => setIsEditing(true)} className="edit-btn">Edit</button>
                             <button onClick={()=>{dispatch(deleteTask(task.id)); navigate('/tasks')}} className="delete-btn ">Delete</button>

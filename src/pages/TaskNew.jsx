@@ -44,7 +44,7 @@ function TaskNew({}){
 
 
     return(
-        <div>
+        <div style={{maxWidth: '400px', margin:'0 auto'}}>
             <h1> Create Task</h1>
             <form onSubmit ={handleSubmit}>
                 <input
@@ -66,9 +66,10 @@ function TaskNew({}){
                     <option value = "done">Done</option>
                 </select>
 
-                <button type="submit">Save Task</button>
-                <button type="button" onClick ={handleCancel}>Cancel</button>
-
+                <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                    <button type="submit">Save Task</button>
+                    <button type="button" onClick ={handleCancel}>Cancel</button>
+                </div>
 
 
             </form>
