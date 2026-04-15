@@ -1,12 +1,16 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
+import { addTask } from '../store/tasksSlice'
 
-function TaskNew({onCreate}){
+function TaskNew({}){
 
 
     const navigate = useNavigate()
     const [formData, setFormData] = useState({title: '', status: 'todo'})
     const [error, setError] = useState('')
+
+    const dispatch = useDispatch()
     
     
     const handleSubmit = (e) => {
@@ -26,7 +30,7 @@ function TaskNew({onCreate}){
             updatedAt: new Date().toISOString(),
         }
 
-        onCreate(newTask)
+        dispatch(addTask(newTask))
         navigate('/tasks')
 
     }
@@ -34,6 +38,8 @@ function TaskNew({onCreate}){
     const handleCancel =()=>{
         navigate('/tasks')
     }
+
+    
 
 
 
