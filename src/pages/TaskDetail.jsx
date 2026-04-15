@@ -1,5 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 
 
@@ -9,7 +10,7 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
     const { id } = useParams()
 
     const task = tasks.find(t=>t.id === id)
-
+    const dispatch = useDispatch()
 
     const [isEditing, setIsEditing] = useState(false)
     const [formData, setFormData] = useState ({title: task?.title || '', status: task?.status || "todo"})
