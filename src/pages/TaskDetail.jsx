@@ -1,15 +1,16 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {selectTaskById, updateTask, deleteTask} from '../store/tasksSlice'
 
 
-
-function TaskDetail ({tasks, onUpdate, onDelete}){
+function TaskDetail (){
     const navigate = useNavigate()
 
     const { id } = useParams()
 
-    const task = tasks.find(t=>t.id === id)
+    const task = useSelector(selectTaskById(id))
     const dispatch = useDispatch()
 
     const [isEditing, setIsEditing] = useState(false)
@@ -25,12 +26,12 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
     }
     
     const handleSave = () =>{
-        onUpdate({
+        dispatch(updateTask({
             ...task,
             title:formData.title,
             status:formData.status,
             updatedAt: new Date().toISOString()
-        })
+        }))
         setIsEditing(false)
     }
 
@@ -69,7 +70,7 @@ function TaskDetail ({tasks, onUpdate, onDelete}){
                         <p>Updated: {task.updatedAt}</p>
                         <div style={{display:'flex', gap: '0.75rem', marginTop: '1rem', alignItems:'center', justifyContent: 'center'  }}>
                             <button onClick={() => setIsEditing(true)} className="edit-btn">Edit</button>
-                            <button onClick={()=>{onDelete(task.id); navigate('/tasks')}} className="delete-btn ">Delete</button>
+                            <button onClick={()=>{dispatch(deleteTask(task.id)); navigate('/tasks')}} className="delete-btn ">Delete</button>
                         </div>
                 </div>
             )}
