@@ -37,13 +37,13 @@ function TaskDetail (){
 
     return(
         <div>
-            <Link to="/tasks" className= "btn-link">Back</Link>
+            <Link to="/tasks" className= "btn-link" style={{marginBottom: '1rem'}}>Back</Link>
 
             {isEditing ? (
-                <div>
-                    <input
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginBottom: '0.75rem', maxWidth: '400px', margin: '0 auto' }}>                    <input
                      type="text"
                      value={formData.title}
+                     
                      onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                     />
                      <select
@@ -58,7 +58,7 @@ function TaskDetail (){
 
                     </select>
 
-                    <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                    <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', justifyContent: 'center' }}>
                         <button onClick={handleSave}>Save</button>
                         <button onClick={() => setIsEditing(false)}>Cancel</button>
                     </div>
