@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { addTask } from '../store/tasksSlice'
+import { createTask } from '../store/tasksSlice'
 
 function TaskNew({}){
 
@@ -12,7 +12,9 @@ function TaskNew({}){
 
     const dispatch = useDispatch()
     
-    
+    const status = useSelector((state) => state.tasks.status)
+
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
@@ -30,7 +32,7 @@ function TaskNew({}){
             updatedAt: new Date().toISOString(),
         }
 
-        dispatch(addTask(newTask))
+        dispatch(createTask(newTask))
         navigate('/tasks')
 
     }
@@ -67,7 +69,9 @@ function TaskNew({}){
                 </select>
 
                 <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
-                    <button type="submit">Save Task</button>
+                    <button type="submit" disabled={status === 'loading'}>
+                        {status === 'loading' ? 'Saving...' : 'Save Task'}
+                    </button>
                     <button type="button" onClick ={handleCancel}>Cancel</button>
                 </div>
 
