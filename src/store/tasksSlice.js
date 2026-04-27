@@ -1,8 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
+
+const initialState = {
+    tasks: [],
+    status: 'idle',
+    error: null
+}
+
 const tasksSlice = createSlice({
     name:'tasks',
-    initialState: [],
+    initialState,
     reducers:{
         
         
