@@ -8,7 +8,7 @@ const initialState = {
     error: null
 }
 
-const API_URL = '/api/tasks'
+const API_URL = 'http://localhost:3001/tasks'
 
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () =>{
     const response = await fetch(API_URL)
