@@ -10,7 +10,9 @@ const initialState = {
 
 const API_URL = '/api/tasks'
 
-
+export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () =>{
+    
+})
 
 const tasksSlice = createSlice({
     name:'tasks',
