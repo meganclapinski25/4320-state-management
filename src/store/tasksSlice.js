@@ -15,11 +15,21 @@ export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () =>{
     return response.json()
 })
 
-export const createTask = createAsyncThunk('tasks/createTask' async (task) => {
+export const createTask = createAsyncThunk('tasks/createTask' , async (task) => {
     const response = await fetch(API_URL,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(task)
+    })
+    return response.json()
+})
+
+export const updateTask = createAsyncThunk('tasks/updateTask', async(task) =>{
+    const response = await fetch('${API_URL}/${task.id}', {
+        method: 'PUT',
+        header: {'Content-Type': 'application/json'},
+        body: JSON.stringify(task)
+
     })
     return response.json()
 })
@@ -30,18 +40,7 @@ const tasksSlice = createSlice({
     reducers:{
         
         
-        addTask(state,action){
-            state.tasks.push(action.payload)
-        },
-
-
-        deleteTask(state,action){
-            state.tasks = state.tasks.filter(task =>task.id !== action.payload)
-        },
-
-        updateTask(state,action){
-            state.tasks = state.tasks.map(task => task.id === action.payload.id ? action.payload: task)
-        }
+        
     }
 })
 
@@ -50,7 +49,7 @@ export const selectAllTasks = (state) => state.tasks.tasks
 export const selectTaskById = (id) => (state) => state.tasks.tasks.find(t => t.id === id)
 
 
-export const {addTask, deleteTask, updateTask} = tasksSlice.actions
+export const {} = tasksSlice.actions
 
 
 
