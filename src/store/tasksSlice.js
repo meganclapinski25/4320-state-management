@@ -15,23 +15,23 @@ const tasksSlice = createSlice({
         
         
         addTask(state,action){
-            state.push(action.payload)
+            state.tasks.push(action.payload)
         },
 
 
         deleteTask(state,action){
-            return state.filter(task =>task.id !== action.payload)
+            state.tasks = state.tasks.filter(task =>task.id !== action.payload)
         },
 
         updateTask(state,action){
-            return state.map(task => task.id === action.payload.id ? action.payload: task)
+            state.tasks = state.tasks.map(task => task.id === action.payload.id ? action.payload: task)
         }
     }
 })
 
-export const selectAllTasks = (state) => state.tasks
+export const selectAllTasks = (state) => state.tasks.tasks
 
-export const selectTaskById = (id) => (state) => state.tasks.find(t => t.id === id)
+export const selectTaskById = (id) => (state) => state.tasks.tasks.find(t => t.id === id)
 
 
 export const {addTask, deleteTask, updateTask} = tasksSlice.actions
