@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 
 
@@ -7,6 +7,10 @@ const initialState = {
     status: 'idle',
     error: null
 }
+
+const API_URL = '/api/tasks'
+
+
 
 const tasksSlice = createSlice({
     name:'tasks',
