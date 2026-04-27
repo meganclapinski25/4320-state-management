@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 import TaskItem from '../components/TaskItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { deleteTask, selectAllTasks } from '../store/tasksSlice'
+import { deleteTask, fetchTasks, selectAllTasks } from '../store/tasksSlice'
+import { useEffect } from 'react'
 
 function TaskList() {
 
@@ -12,6 +13,16 @@ function TaskList() {
     dispatch(deleteTask(id))
   }
 
+  const status = useSelector((state) => state.tasks.status)
+  const error = useSelector((state) => state.tasks.error)
+
+  useEffect(()=>{
+    dispatch(fetchTasks())
+
+  },[dispatch])
+  
+  if (status === 'loading') return <p>Loading...</p>
+  if (status === 'failed') return <p>Error: {error}</p>
   return(
     <div>
        <h1>Task List</h1>
