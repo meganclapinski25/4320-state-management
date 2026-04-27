@@ -25,9 +25,9 @@ export const createTask = createAsyncThunk('tasks/createTask' , async (task) => 
 })
 
 export const updateTask = createAsyncThunk('tasks/updateTask', async(task) =>{
-    const response = await fetch('${API_URL}/${task.id}', {
+    const response = await fetch(`${API_URL}/${task.id}`, {
         method: 'PUT',
-        header: {'Content-Type': 'application/json'},
+        headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(task)
 
     })
