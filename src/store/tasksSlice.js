@@ -60,6 +60,12 @@ const tasksSlice = createSlice({
             .addCase(createTask.fulfilled, (state,action) =>{
                 state.tasks.push(action.payload)
             })
+            .addCase(updateTask.fulfilled, (state, action)=>{
+                state.tasks = state.tasks.map(task=> task.id === action.payload.id ? action.payload : task)
+            })
+            .addCase(deleteTask.fulfilled, (state,action)=>{
+                state.tasks = state.tasks.filter(task => task.id !== action.payload)
+            })
 
 
     }
