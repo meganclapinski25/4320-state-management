@@ -1,15 +1,18 @@
-import { Link } from "react-router-dom"
-
+import { Link } from 'react-router-dom'
 
 function TaskItem({ task, onDelete }) {
-    return (
-      <div className="task-item">
-        <p>{task.title}</p>
-        <p>{task.status}</p>
+  const statusClass = `status-badge status-${task.status}`
+
+  return (
+    <div className="task-item">
+      <p className="task-title">{task.title}</p>
+      <span className={statusClass}>{task.status}</span>
+      <div className="task-actions-row">
         <button className="delete-btn" onClick={() => onDelete(task.id)}>Delete</button>
-        <Link to={`/tasks/${task.id}`} className="edit-btn"> Edit</Link>
+        <Link to={`/tasks/${task.id}`} className="edit-btn">Edit</Link>
       </div>
-    )
-  }
-  
-  export default TaskItem
+    </div>
+  )
+}
+
+export default TaskItem
