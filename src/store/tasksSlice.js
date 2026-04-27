@@ -11,7 +11,8 @@ const initialState = {
 const API_URL = '/api/tasks'
 
 export const fetchTasks = createAsyncThunk('tasks/fetchTasks', async () =>{
-    
+    const response = await fetch(API_URL)
+    return response.json()
 })
 
 const tasksSlice = createSlice({
