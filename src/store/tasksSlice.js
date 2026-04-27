@@ -42,10 +42,18 @@ export const deleteTask = createAsyncThunk('tasks/deleteTask', async(id) =>{
 const tasksSlice = createSlice({
     name:'tasks',
     initialState,
-    reducers:{
-        
-        
-        
+    reducers:{ 
+    },
+    extraReducers: (builder) =>{
+        builder
+            .addCase(fetchTasks.pending, (state)=>{
+                state.status = 'loading'
+            })
+            .addCase(fetchTasks.fulfilled, (state,action)=>{
+                state.status = 'succeeded'
+                state.tasks = action.payload
+            })
+
     }
 })
 
