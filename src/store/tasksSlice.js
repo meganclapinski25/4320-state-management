@@ -53,6 +53,14 @@ const tasksSlice = createSlice({
                 state.status = 'succeeded'
                 state.tasks = action.payload
             })
+            .addCase(fetchTasks.rejected, (state,action) =>{
+                state.status = 'failed'
+                state.error = action.error.message
+            })
+            .addCase(createTask.fulfilled, (state,action) =>{
+                state.tasks.push(action.payload)
+            })
+
 
     }
 })
