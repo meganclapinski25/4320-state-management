@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { createTask } from '../store/tasksSlice'
 
-function TaskNew({}){
+function TaskNew(){
 
 
     const navigate = useNavigate()
@@ -25,7 +25,7 @@ function TaskNew({}){
         }
 
         const newTask ={
-            id: crypto.randomUUID(),
+            
             title: formData.title,
             status: formData.status,
             createdAt: new Date().toISOString(),
