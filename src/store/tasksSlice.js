@@ -34,6 +34,11 @@ export const updateTask = createAsyncThunk('tasks/updateTask', async(task) =>{
     return response.json()
 })
 
+export const deleteTask = createAsyncThunk('tasks/deleteTask', async(id) =>{
+    await fetch(`${API_URL}/${id}`, {method: 'DELETE'})
+    return id
+})
+
 const tasksSlice = createSlice({
     name:'tasks',
     initialState,
@@ -47,10 +52,5 @@ const tasksSlice = createSlice({
 export const selectAllTasks = (state) => state.tasks.tasks
 
 export const selectTaskById = (id) => (state) => state.tasks.tasks.find(t => t.id === id)
-
-
-export const {} = tasksSlice.actions
-
-
 
 export default tasksSlice.reducer
