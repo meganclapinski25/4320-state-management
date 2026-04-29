@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCategories, createCategory, deleteCategory, selectAllCategories } from '../store/categoriesSlice'
+import { fetchCategories, createCategory, deleteCategories, selectAllCategories } from '../store/categoriesSlice'
 import { useEffect, useState } from 'react'
 
 function CategoryList(){
@@ -25,9 +25,11 @@ function CategoryList(){
     }
 
     const handleDelete = async(id) =>{
-        await dispatch(deleteCategory(id))
+        await dispatch(deleteCategories(id))
     }
-
+    if (status === 'loading') return <p>Loading...</p>
+    if (status === 'failed') return <p>Error: {error}</p>
+    if (!Array.isArray(categories)) return <p>Loading...</p>
     return(
         <div>
             <h1>Categories</h1>

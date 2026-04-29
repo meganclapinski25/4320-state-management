@@ -27,6 +27,7 @@ function TaskList() {
         <h1>My Tasks <span className="task-count">{tasks.length}</span></h1>
         <Link to="/tasks/new" className="btn-link">+ New Task</Link>
       </div>
+      <Link to="/categories" className="btn-link">Manage Categories</Link>
 
       {tasks.length === 0 ? (
         <p className="state-message">No tasks yet. Create one to get started.</p>

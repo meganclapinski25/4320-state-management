@@ -3,6 +3,8 @@ import { Routes, Route, Navigate, Link } from 'react-router-dom'
 import TaskList from './pages/TaskList'
 import TaskNew from './pages/TaskNew'
 import TaskDetail from './pages/TaskDetail'
+import CategoryList from './pages/CategoryList'
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
         <Route path="/tasks" element={<TaskList />} />
         <Route path="/tasks/new" element={<TaskNew />} />
         <Route path="/tasks/:id" element={<TaskDetail />} />
+        <Route path="/categories" element={<CategoryList />} />
       </Routes>
     </>
   )
