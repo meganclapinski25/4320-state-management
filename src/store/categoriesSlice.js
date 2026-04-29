@@ -15,7 +15,7 @@ export const fetchCategories = createAsyncThunk('categories/fetchCategories', as
     return response.json()
 })
 
-export const createCategory = createAsyncThunk('categories/createCategory' , async (task) => {
+export const createCategory = createAsyncThunk('categories/createCategory' , async (category) => {
     const response = await fetch(API_URL,{
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
@@ -41,11 +41,11 @@ const categoriesSlice = createSlice({
             .addCase(fetchCategories.pending, (state)=>{
                 state.status = 'loading'
             }) 
-            .addCase(fetchCategories.fulfilled, (state)=>{
+            .addCase(fetchCategories.fulfilled, (state, action)=>{
                 state.status = 'succeeded'
                 state.categories = action.payload
             }) 
-            .addCase(fetchCategories.rejected, (state)=>{
+            .addCase(fetchCategories.rejected, (state, action)=>{
                 state.status = 'failed'
                 state.error = action.error.message
             }) 
@@ -65,4 +65,4 @@ export const selectAllCategories = (state) => state.categories.categories
 export const selectCategoryById = (id) => (state) => state.categories.categories.find(c => c.id ===id)
 
 
-export const { } = categoriesSlice.actions
+export default categoriesSlice.reducer
