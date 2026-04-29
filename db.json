@@ -1,20 +1,35 @@
 {
   "tasks": [
     {
-      "title": "homework ",
-      "status": "done",
-      "createdAt": "2026-04-29T20:25:42.540Z",
-      "updatedAt": "2026-04-29T20:28:44.417Z",
-      "id": "j0GXv5J5yus"
+      "title": "Homework ",
+      "status": "todo",
+      "createdAt": "2026-04-29T21:45:43.750Z",
+      "updatedAt": "2026-04-29T21:45:43.750Z",
+      "categoryID": "",
+      "id": "wnPiY2q8TSo"
     },
     {
-      "title": "homework",
+      "title": "Paper ",
       "status": "todo",
-      "createdAt": "2026-04-29T20:28:38.997Z",
-      "updatedAt": "2026-04-29T20:28:38.997Z",
-      "id": "tNEKNhfv6Oc"
+      "createdAt": "2026-04-29T21:45:49.502Z",
+      "updatedAt": "2026-04-29T21:45:49.502Z",
+      "categoryID": "",
+      "id": "_yfPmfAmH9I"
     }
   ],
-  "categories": [],
+  "categories": [
+    {
+      "name": "ACS 3300 ",
+      "id": "cjKOIlLUsRI"
+    },
+    {
+      "name": "Thearpy ",
+      "id": "74sD4Y0y0Ys"
+    },
+    {
+      "name": "ACS 4320 ",
+      "id": "DFaQ21POZXA"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

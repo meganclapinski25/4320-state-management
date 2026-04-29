@@ -2,14 +2,15 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { createTask } from '../store/tasksSlice'
+import { fetchCategories, selectAllCategories } from '../store/categoriesSlice'
 
 function TaskNew() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({ title: '', status: 'todo' })
+  const [formData, setFormData] = useState({ title: '', status: 'todo', categoryID: '' })
   const [error, setError] = useState('')
   const dispatch = useDispatch()
   const status = useSelector((state) => state.tasks.status)
-
+  const categories = useSelector(selectAllCategories)
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -23,6 +24,7 @@ function TaskNew() {
       status: formData.status,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
+      categoryID: formData.categoryID,
     }
 
     await dispatch(createTask(newTask))
@@ -56,6 +58,19 @@ function TaskNew() {
             <option value="todo">Todo</option>
             <option value="doing">Doing</option>
             <option value="done">Done</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label htmlFor="category">Category</label>
+          <select
+            id="category"
+            value={formData.categoryId}
+            onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
+          >
+            <option value="">No Category</option>
+            {categories.map(cat => (
+              <option key={cat.id} value={cat.id}>{cat.name}</option>
+            ))}
           </select>
         </div>
 
