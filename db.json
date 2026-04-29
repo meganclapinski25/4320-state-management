@@ -1,27 +1,5 @@
 {
-  "tasks": [
-    {
-      "title": "Paper ",
-      "status": "todo",
-      "createdAt": "2026-04-29T21:47:51.873Z",
-      "updatedAt": "2026-04-29T21:47:51.873Z",
-      "categoryID": "",
-      "id": "FnlWIm6FDA4"
-    }
-  ],
-  "categories": [
-    {
-      "name": "ACS 3300 ",
-      "id": "cjKOIlLUsRI"
-    },
-    {
-      "name": "Thearpy ",
-      "id": "74sD4Y0y0Ys"
-    },
-    {
-      "name": "ACS 4320 ",
-      "id": "DFaQ21POZXA"
-    }
-  ],
+  "tasks": [],
+  "categories": [],
   "$schema": "./node_modules/json-server/schema.json"
 }

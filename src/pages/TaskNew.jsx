@@ -6,7 +6,7 @@ import { fetchCategories, selectAllCategories } from '../store/categoriesSlice'
 
 function TaskNew() {
   const navigate = useNavigate()
-  const [formData, setFormData] = useState({ title: '', status: 'todo', categoryID: '' })
+  const [formData, setFormData] = useState({ title: '', status: 'todo', categoryId: '' })
   const [error, setError] = useState('')
   const dispatch = useDispatch()
   const status = useSelector((state) => state.tasks.status)
@@ -24,7 +24,7 @@ function TaskNew() {
       status: formData.status,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      categoryID: formData.categoryID,
+      categoryId: formData.categoryID,
     }
 
     await dispatch(createTask(newTask))
