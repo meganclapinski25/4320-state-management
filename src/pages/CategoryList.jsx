@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { createCategory, deleteCategory, fetchCategories, selectAllCategories } from '../store/categoriesSlice'
+import { fetchCategories, createCategory, deleteCategory, selectAllCategories } from '../store/categoriesSlice'
 import { useEffect, useState } from 'react'
 
 function CategoryList(){
