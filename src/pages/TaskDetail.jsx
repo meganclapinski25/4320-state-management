@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectTaskById, updateTask, deleteTask } from '../store/tasksSlice'
+import { selectAllCategories, fetchCategories } from '../store/categoriesSlice'
 
 function TaskDetail() {
   const navigate = useNavigate()
@@ -11,6 +12,11 @@ function TaskDetail() {
 
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({ title: task?.title || '', status: task?.status || 'todo' })
+
+  const categories = useSelector(selectAllCategories)
+  const taskCategory = categories.find(c => c.id ===task.categoryId)
+
+
 
   if (!task) {
     return (
@@ -82,6 +88,8 @@ function TaskDetail() {
               <p>Created: {formatDate(task.createdAt)}</p>
               <p>Updated: {formatDate(task.updatedAt)}</p>
             </div>
+
+            <p>Category: {taskCategory ? taskCategory.name : 'None'}</p>
 
             <div className="task-detail-actions">
               <button className="edit-btn" onClick={() => setIsEditing(true)}>Edit</button>
