@@ -53,7 +53,7 @@ const categoriesSlice = createSlice({
                 state.categories.push(action.payload)
             }) 
             .addCase(deleteCategories.fulfilled, (state,action)=>{
-                state.status = 'loading'
+                state.categories = state.categories.filter(c => c.id !==action.payload)
             }) 
 
 
@@ -61,5 +61,8 @@ const categoriesSlice = createSlice({
 })
 
 
+export const selectAllCategories = (state) => state.categories.categories
+export const selectCategoryById = (id) => (state) => state.categories.categories.find(c => c.id ===id)
 
-export default categoriesSlice.reducer
+
+export const { } = categoriesSlice.actions
