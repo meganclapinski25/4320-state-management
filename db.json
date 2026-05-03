@@ -1,21 +1,18 @@
 {
   "tasks": [
     {
-      "title": "Fart",
+      "title": "Fart ",
       "status": "todo",
-      "createdAt": "2026-05-03T22:29:29.614Z",
-      "updatedAt": "2026-05-03T22:29:29.614Z",
-      "id": "8SZBMRT0m8w"
+      "createdAt": "2026-05-03T22:40:42.548Z",
+      "updatedAt": "2026-05-03T22:40:42.548Z",
+      "categoryId": "zGJ5tEd97zo",
+      "id": "KOdd_mJQzys"
     }
   ],
   "categories": [
     {
-      "name": "ACS 4320",
-      "id": "NTIjhD8D-ZM"
-    },
-    {
-      "name": "ACS 3330",
-      "id": "AQfBjn8aQKc"
+      "name": "ACs 3333",
+      "id": "zGJ5tEd97zo"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

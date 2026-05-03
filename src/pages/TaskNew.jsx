@@ -24,7 +24,7 @@ function TaskNew() {
       status: formData.status,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      categoryId: formData.categoryID,
+      categoryId: formData.categoryId || null,
     }
 
     await dispatch(createTask(newTask))
