@@ -11,12 +11,13 @@ function TaskDetail() {
   const dispatch = useDispatch()
 
   const [isEditing, setIsEditing] = useState(false)
-  const [formData, setFormData] = useState({ title: task?.title || '', status: task?.status || 'todo' })
+  const [formData, setFormData] = useState({
+    title: task?.title || '',
+    status: task?.status || 'todo',
+    categoryId: task?.categoryId || '',
+  })
 
   const categories = useSelector(selectAllCategories)
-  const taskCategory = categories.find(c => c.id ===task.categoryId)
-
-
 
   if (!task) {
     return (
@@ -27,11 +28,14 @@ function TaskDetail() {
     )
   }
 
+  const taskCategory = categories.find(c => String(c.id) === String(task.categoryId))
+
   const handleSave = () => {
     dispatch(updateTask({
       ...task,
       title: formData.title,
       status: formData.status,
+      categoryId: formData.categoryId || null,
       updatedAt: new Date().toISOString(),
     }))
     setIsEditing(false)
@@ -71,6 +75,19 @@ function TaskDetail() {
                   <option value="todo">Todo</option>
                   <option value="doing">Doing</option>
                   <option value="done">Done</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="edit-category">Category</label>
+                <select
+                  id="edit-category"
+                  value={formData.categoryId}
+                  onChange={(e) => setFormData({ ...formData, categoryId: e.target.value })}
+                >
+                  <option value="">None</option>
+                  {categories.map(c => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
                 </select>
               </div>
             </div>

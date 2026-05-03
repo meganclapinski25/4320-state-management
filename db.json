@@ -1,5 +1,22 @@
 {
-  "tasks": [],
-  "categories": [],
+  "tasks": [
+    {
+      "title": "Fart",
+      "status": "todo",
+      "createdAt": "2026-05-03T22:29:29.614Z",
+      "updatedAt": "2026-05-03T22:29:29.614Z",
+      "id": "8SZBMRT0m8w"
+    }
+  ],
+  "categories": [
+    {
+      "name": "ACS 4320",
+      "id": "NTIjhD8D-ZM"
+    },
+    {
+      "name": "ACS 3330",
+      "id": "AQfBjn8aQKc"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
