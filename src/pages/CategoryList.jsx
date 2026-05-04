@@ -61,14 +61,16 @@ function CategoryList(){
             </div>
 
             {categories.map(category => (
-              <div key={category.id} className="task-item">
-                <span className="cat-dot" style={{ background: category.color }} >
-                  {category.name}
-                </span>
-                <span style={{ flex:1 }}/>
-                <button className="delete-btn" onClick={() => handleDelete(category.id)}>Delete</button>
-              </div>
-            ))}
+            <div key={category.id} className="task-item">
+              <span className="cat-tag" style={{ background: category.color }}>
+                {category.name}
+              </span>
+              <span style={{ flex: 1 }} />
+              <button className="delete-btn" onClick={() => handleDelete(category.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
         </div>
     )
 
