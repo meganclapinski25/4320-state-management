@@ -36,7 +36,7 @@ function CategoryList(){
     return(
         <div>
             <h1>Categories</h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
               <div style={{ display: 'flex', gap: '0.75rem' }}>
                 <input
                   type="text"
@@ -44,9 +44,9 @@ function CategoryList(){
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                <button onClick={handleCreate}>Add</button>
+                <button className="btn-primary" onClick={handleCreate}>Add</button>
               </div>
-              <div className="swatch-row">
+              <div className="swatch-row" style={{marginTop: '0.5rem'}}>
                 {PALETTE.map(c => (
                   <button
                     type="button"
