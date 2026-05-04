@@ -62,7 +62,7 @@ function CategoryList(){
 
             {categories.map(category => (
               <div key={category.id} className="task-item">
-                <span className="cat-dot" style={{ background: getCategoryColor(category) }} />
+                <span className="cat-dot" style={{ background: category.color }} />
                 <p style={{ flex: 1 }}>{category.name}</p>
                 <button className="delete-btn" onClick={() => handleDelete(category.id)}>Delete</button>
               </div>

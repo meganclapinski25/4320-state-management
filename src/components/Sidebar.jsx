@@ -1,5 +1,7 @@
 import { useEffect } from "react"
-import { fetchCategories } from "../store/categoriesSlice"
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { fetchCategories, selectAllCategories } from '../store/categoriesSlice'
 
 
 
@@ -7,7 +9,7 @@ import { fetchCategories } from "../store/categoriesSlice"
 
 
 function Sidebar(){
-    const dispatch = useDisptach()
+    const dispatch = useDispatch()
     const categories = useSelector(selectAllCategories)
 
     useEffect(()=>{
@@ -19,26 +21,31 @@ function Sidebar(){
 
     const list = Array.isArray(categories) ? categories :[]
 
-    return(
+    return (
         <aside className="sidebar">
-            <div className="sidebar-card">
-                <h3>Categories</h3>
-                {list.length === 0 ? (
-                    <p className="sidebar-empty">No categories yet.</p>
-                    ) : (
-                        <ul className="sidebar-categories">
-                            <li key={cat.id}>
-                                <span className="cat-dot" style={{ background: getCategoryColor(cat) }} />
-                                {cat.name}
-                                </li>
-                                ))}
-                        </ul>
-                    )}
-                    <Link to="/categories" className="sidebar-add-cat">+ Categories</Link>
-            </div>
+          <div className="sidebar-card">
+            <h3>Categories</h3>
+    
+            {list.length === 0 ? (
+              <p className="sidebar-empty">No categories yet.</p>
+            ) : (
+              <ul className="sidebar-categories">
+                {list.map(cat => (
+                  <li key={cat.id}>
+                    <span
+                      className="cat-dot"
+                      style={{ background: cat.color }}
+                    />
+                    {cat.name}
+                  </li>
+                ))}
+              </ul>
+            )}
+    
+            <Link to="/categories" className="sidebar-add-cat">+ Categories</Link>
+          </div>
         </aside>
-    )
-
-}
+      )
+    }
 
 export default Sidebar
