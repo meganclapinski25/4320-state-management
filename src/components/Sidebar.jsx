@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchCategories, selectAllCategories } from '../store/categoriesSlice'
+import { fetchCategories, selectAllCategories, deleteCategories } from '../store/categoriesSlice'
 
 
 
@@ -36,7 +36,13 @@ function Sidebar(){
                       className="cat-dot"
                       style={{ background: cat.color }}
                     />
-                    {cat.name}
+                    <span className = "cat-name">{cat.name}</span>
+                    <button
+                      className="cat-remove"
+                      onClick={() => dispatch(deleteCategories(cat.id))}
+                    >
+                      -
+                    </button>
                   </li>
                 ))}
               </ul>

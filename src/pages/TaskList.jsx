@@ -3,6 +3,7 @@ import TaskItem from '../components/TaskItem'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTask, fetchTasks, selectAllTasks } from '../store/tasksSlice'
 import { useEffect } from 'react'
+import Sidebar from '../components/Sidebar'
 
 function TaskList() {
   const tasks = useSelector(selectAllTasks)
@@ -23,15 +24,13 @@ function TaskList() {
 
   return (
     <div className="app-layout">
-      <aside className="sidebar">
-
-      </aside>
+      <Sidebar />
       <main className ="app-main">
         <div className="task-list-header">
           <h1>My Tasks <span className="task-count">{tasks.length}</span></h1>
           <Link to="/tasks/new" className="btn-link">+ New Task</Link>
         </div>
-        <Link to="/categories" className="btn-link">Manage Categories</Link>
+       
 
         {tasks.length === 0 ? (
           <p className="state-message">No tasks yet. Create one to get started.</p>
