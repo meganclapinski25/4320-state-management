@@ -1,5 +1,5 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectTaskById, updateTask, deleteTask } from '../store/tasksSlice'
 import { selectAllCategories, fetchCategories } from '../store/categoriesSlice'
@@ -19,6 +19,10 @@ function TaskDetail() {
 
   const categories = useSelector(selectAllCategories)
 
+  useEffect(() => {
+    dispatch(fetchCategories())
+  }, [dispatch])
+
   if (!task) {
     return (
       <div>
@@ -28,7 +32,9 @@ function TaskDetail() {
     )
   }
 
-  const taskCategory = categories.find(c => String(c.id) === String(task.categoryId))
+  const taskCategory = Array.isArray(categories)
+    ? categories.find(c => String(c.id) === String(task.categoryId))
+    : null
 
   const handleSave = () => {
     dispatch(updateTask({
@@ -98,15 +104,37 @@ function TaskDetail() {
           </>
         ) : (
           <>
-            <h1>{task.title}</h1>
-            <span className={`status-badge status-${task.status}`}>{task.status}</span>
-
-            <div className="task-meta">
-              <p>Created: {formatDate(task.createdAt)}</p>
-              <p>Updated: {formatDate(task.updatedAt)}</p>
+            <div className="task-detail-header">
+              <h1>{task.title}</h1>
+              <div className="task-detail-tags">
+                <span className={`status-badge status-${task.status}`}>{task.status}</span>
+                {taskCategory && (
+                  <span
+                    className="cat-tag"
+                    style={{ background: taskCategory.color }}
+                  >
+                    {taskCategory.name}
+                  </span>
+                )}
+              </div>
             </div>
 
-            <p>Category: {taskCategory ? taskCategory.name : 'None'}</p>
+            <dl className="task-meta">
+              <div className="task-meta-row">
+                <dt>Created</dt>
+                <dd>{formatDate(task.createdAt)}</dd>
+              </div>
+              <div className="task-meta-row">
+                <dt>Updated</dt>
+                <dd>{formatDate(task.updatedAt)}</dd>
+              </div>
+              {!taskCategory && (
+                <div className="task-meta-row">
+                  <dt>Category</dt>
+                  <dd className="muted">None</dd>
+                </div>
+              )}
+            </dl>
 
             <div className="task-detail-actions">
               <button className="edit-btn" onClick={() => setIsEditing(true)}>Edit</button>
