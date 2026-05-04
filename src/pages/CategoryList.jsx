@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCategories, createCategory, deleteCategories, selectAllCategories } from '../store/categoriesSlice'
 import { useEffect, useState } from 'react'
+import PALETTE from '/util/'
 
 function CategoryList(){
     const categories = useSelector(selectAllCategories)
@@ -12,6 +13,7 @@ function CategoryList(){
 
 
     const [name, setName] = useState('')
+    const [color, setColor] = useState(PALETTE[0])
 
 
     useEffect(() =>{
@@ -49,6 +51,19 @@ function CategoryList(){
         <button className="delete-btn" onClick={() => handleDelete(category.id)}>Delete</button>
       </div>
     ))}
+
+        <div className="swatch-row">
+            {PALETTE.map(c => (
+              <button
+                type="button"
+                key={c}
+                className={'swatch' + (c === color ? ' selected' : '')}
+                style={{ background: c }}
+                onClick={() => setColor(c)}
+                aria-label={`Color ${c}`}
+              />
+            ))}
+          </div>
         </div>
     )
 
