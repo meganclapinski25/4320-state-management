@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchCategories, createCategory, deleteCategories, selectAllCategories } from '../store/categoriesSlice'
 import { useEffect, useState } from 'react'
-import PALETTE from '/util/'
+import { PALETTE } from '../utils/palette'
+
 
 function CategoryList(){
     const categories = useSelector(selectAllCategories)
@@ -35,35 +36,37 @@ function CategoryList(){
     return(
         <div>
             <h1>Categories</h1>
-            <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem' }}>
-      <input
-        type="text"
-        placeholder="New category name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <button onClick={handleCreate}>Add</button>
-    </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <input
+                  type="text"
+                  placeholder="New category name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <button onClick={handleCreate}>Add</button>
+              </div>
+              <div className="swatch-row">
+                {PALETTE.map(c => (
+                  <button
+                    type="button"
+                    key={c}
+                    className={'swatch' + (c === color ? ' selected' : '')}
+                    style={{ background: c }}
+                    onClick={() => setColor(c)}
+                    aria-label={`Color ${c}`}
+                  />
+                ))}
+              </div>
+            </div>
 
-    {categories.map(category => (
-      <div key={category.id} className="task-item">
-        <p>{category.name}</p>
-        <button className="delete-btn" onClick={() => handleDelete(category.id)}>Delete</button>
-      </div>
-    ))}
-
-        <div className="swatch-row">
-            {PALETTE.map(c => (
-              <button
-                type="button"
-                key={c}
-                className={'swatch' + (c === color ? ' selected' : '')}
-                style={{ background: c }}
-                onClick={() => setColor(c)}
-                aria-label={`Color ${c}`}
-              />
+            {categories.map(category => (
+              <div key={category.id} className="task-item">
+                <span className="cat-dot" style={{ background: getCategoryColor(category) }} />
+                <p style={{ flex: 1 }}>{category.name}</p>
+                <button className="delete-btn" onClick={() => handleDelete(category.id)}>Delete</button>
+              </div>
             ))}
-          </div>
         </div>
     )
 
