@@ -31,11 +31,14 @@ function Sidebar(){
                                 <span className="cat-dot" style={{ background: getCategoryColor(cat) }} />
                                 {cat.name}
                                 </li>
+                                ))}
                         </ul>
-                    )
+                    )}
+                    <Link to="/categories" className="sidebar-add-cat">+ Categories</Link>
             </div>
         </aside>
     )
+
 }
 
 export default Sidebar
