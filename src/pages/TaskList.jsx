@@ -23,6 +23,9 @@ function TaskList() {
 
   return (
     <div className="main-layout">
+      <aside className="sidebar">
+        
+      </aside>
       <main className ="app-main">
         <div className="task-list-header">
           <h1>My Tasks <span className="task-count">{tasks.length}</span></h1>
