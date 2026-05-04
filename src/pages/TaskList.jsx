@@ -22,20 +22,22 @@ function TaskList() {
   if (status === 'failed') return <p className="state-message">Error: {error}</p>
 
   return (
-    <div>
-      <div className="task-list-header">
-        <h1>My Tasks <span className="task-count">{tasks.length}</span></h1>
-        <Link to="/tasks/new" className="btn-link">+ New Task</Link>
-      </div>
-      <Link to="/categories" className="btn-link">Manage Categories</Link>
+    <div className="main-layout">
+      <main className ="app-main">
+        <div className="task-list-header">
+          <h1>My Tasks <span className="task-count">{tasks.length}</span></h1>
+          <Link to="/tasks/new" className="btn-link">+ New Task</Link>
+        </div>
+        <Link to="/categories" className="btn-link">Manage Categories</Link>
 
-      {tasks.length === 0 ? (
-        <p className="state-message">No tasks yet. Create one to get started.</p>
-      ) : (
-        tasks.map(task => (
-          <TaskItem key={task.id} task={task} onDelete={handleDelete} />
-        ))
-      )}
+        {tasks.length === 0 ? (
+          <p className="state-message">No tasks yet. Create one to get started.</p>
+        ) : (
+          tasks.map(task => (
+            <TaskItem key={task.id} task={task} onDelete={handleDelete} />
+          ))
+        )}
+      </main>
     </div>
   )
 }
