@@ -23,7 +23,7 @@ function CategoryList(){
 
 
     const handleCreate = async () =>{
-        await dispatch(createCategory({name}))
+        await dispatch(createCategory({name, color}))
         setName('')
     }
 
@@ -62,8 +62,10 @@ function CategoryList(){
 
             {categories.map(category => (
               <div key={category.id} className="task-item">
-                <span className="cat-dot" style={{ background: category.color }} />
-                <p style={{ flex: 1 }}>{category.name}</p>
+                <span className="cat-dot" style={{ background: category.color }} >
+                  {category.name}
+                </span>
+                <span style={{ flex:1 }}/>
                 <button className="delete-btn" onClick={() => handleDelete(category.id)}>Delete</button>
               </div>
             ))}
