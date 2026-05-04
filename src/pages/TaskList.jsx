@@ -22,9 +22,9 @@ function TaskList() {
   if (status === 'failed') return <p className="state-message">Error: {error}</p>
 
   return (
-    <div className="main-layout">
+    <div className="app-layout">
       <aside className="sidebar">
-        
+
       </aside>
       <main className ="app-main">
         <div className="task-list-header">

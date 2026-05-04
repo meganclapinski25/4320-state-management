@@ -376,7 +376,9 @@ label {
   gap: 1.5rem;
   align-items: start;
 }
-
+.app-main {
+  min-width: 0;
+}
 @media (max-width: 720px) {
   .app-layout {
     grid-template-columns: 1fr;
