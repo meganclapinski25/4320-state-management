@@ -14,7 +14,6 @@ function CategoryList(){
 
 
     const [name, setName] = useState('')
-    const [color, setColor] = useState(PALETTE[0])
 
 
     useEffect(() =>{
@@ -23,7 +22,13 @@ function CategoryList(){
 
 
     const handleCreate = async () =>{
-        await dispatch(createCategory({name, color}))
+        // pick a random color from the palette, preferring ones not already in use
+        const used = new Set(categories.map(c => c.color))
+        const available = PALETTE.filter(c => !used.has(c))
+        const pool = available.length > 0 ? available : PALETTE
+        const color = pool[Math.floor(Math.random() * pool.length)]
+
+        await dispatch(createCategory({ name, color }))
         setName('')
     }
 
@@ -36,28 +41,14 @@ function CategoryList(){
     return(
         <div>
             <h1>Categories</h1>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
-              <div style={{ display: 'flex', gap: '0.75rem' }}>
-                <input
-                  type="text"
-                  placeholder="New category name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <button className="btn-primary" onClick={handleCreate}>Add</button>
-              </div>
-              <div className="swatch-row" style={{marginTop: '0.5rem'}}>
-                {PALETTE.map(c => (
-                  <button
-                    type="button"
-                    key={c}
-                    className={'swatch' + (c === color ? ' selected' : '')}
-                    style={{ background: c }}
-                    onClick={() => setColor(c)}
-                    aria-label={`Color ${c}`}
-                  />
-                ))}
-              </div>
+            <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem' }}>
+              <input
+                type="text"
+                placeholder="New category name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <button className="btn-primary" onClick={handleCreate}>Add</button>
             </div>
 
             {categories.map(category => (
