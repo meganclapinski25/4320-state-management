@@ -30,7 +30,8 @@ function TaskNew() {
   })
   
 
-  createMutation.mutate(newTask)
+  const handleSubmit = (e) => {
+    e.preventDefault()
 
     if (formData.title.length < 3 || formData.title.length > 60) {
       setError('Title must be between 3 and 60 characters.')
@@ -45,8 +46,7 @@ function TaskNew() {
       categoryId: formData.categoryId || null,
     }
 
-    await dispatch(createTask(newTask))
-    navigate('/tasks')
+    createMutation.mutate(newTask)
   }
 
   return (
