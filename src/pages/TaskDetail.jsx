@@ -55,12 +55,9 @@ function TaskDetail() {
   })
 
   
+  if (isLoading) return <p className="state-message">Loading...</p>
 
-  useEffect(() => {
-    dispatch(fetchCategories())
-  }, [dispatch])
-
-  if (!task) {
+  if ( isError || !task) {
     return (
       <div>
         <h2>Task not found</h2>
@@ -69,19 +66,16 @@ function TaskDetail() {
     )
   }
 
-  const taskCategory = Array.isArray(categories)
-    ? categories.find(c => String(c.id) === String(task.categoryId))
-    : null
+  const taskCategory = categories.find(c => String(c.id) === String(task.categoryId))
 
   const handleSave = () => {
-    dispatch(updateTask({
+    updateMutation.muatate({
       ...task,
       title: formData.title,
       status: formData.status,
       categoryId: formData.categoryId || null,
       updatedAt: new Date().toISOString(),
-    }))
-    setIsEditing(false)
+    })
   }
 
   const formatDate = (iso) =>
@@ -135,7 +129,8 @@ function TaskDetail() {
               </div>
             </div>
             <div className="form-actions">
-              <button className="btn-primary" onClick={handleSave}>Save Changes</button>
+              <button className="btn-primary" onClick={handleSave} disabled ={updateMutation.isPending}>
+                {updateMutation.isPending ? 'Saving...' : 'Save Changes'}</button>
               <button className="btn-secondary" onClick={() => setIsEditing(false)}>Cancel</button>
             </div>
           </>
@@ -175,10 +170,9 @@ function TaskDetail() {
 
             <div className="task-detail-actions">
               <button className="edit-btn" onClick={() => setIsEditing(true)}>Edit</button>
-              <button className="delete-btn" onClick={async () => {
-                await dispatch(deleteTask(task.id))
-                navigate('/tasks')
-              }}>Delete</button>
+              <button className="delete-btn" onClick={() => deleteMutation.mutate()} disabled={deleteMutation.isPending}>
+                {deleteMutation.isPending ? 'Deleting...' : 'Delete'}
+              </button>
             </div>
           </>
         )}
