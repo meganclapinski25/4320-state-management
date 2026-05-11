@@ -1,14 +1,25 @@
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectTaskById, updateTask, deleteTask } from '../store/tasksSlice'
-import { selectAllCategories, fetchCategories } from '../store/categoriesSlice'
+import { useState } from 'react'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+
+const TASKS_URL = 'http://localhost:3001/tasks'
+const CATEGORIES_URL = 'http://localhost:3001/categories'
+
 
 function TaskDetail() {
   const navigate = useNavigate()
   const { id } = useParams()
-  const task = useSelector(selectTaskById(id))
-  const dispatch = useDispatch()
+  const queryClient = useQueryClient()
+
+  const { data: task, isLoading, isError } = useQuery({
+    queryKey: ['tasks', id],
+    queryFn: () => fetch(`${TASKS_URL}/${id}`).then(res => res.json())
+  })
+
+
+
+
+
 
   const [isEditing, setIsEditing] = useState(false)
   const [formData, setFormData] = useState({

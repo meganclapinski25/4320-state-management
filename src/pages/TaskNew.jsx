@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
-import { createTask } from '../store/tasksSlice'
-import { fetchCategories, selectAllCategories } from '../store/categoriesSlice'
+
 
 function TaskNew() {
   const navigate = useNavigate()
