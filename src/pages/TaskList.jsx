@@ -9,13 +9,21 @@ const API_URL = 'http://localhost:3001/tasks'
 function TaskList() {
   const queryClient = useQueryClient()
 
+
+  const { data: tasks =[], isLoading, isError, error} = useQuery({
+    queryKey: ['tasks'],
+    queryFn: () => fetch(API_URL).then(res => res.json())
+  })
+
+  const deleteMutation = useMutation({
+    mutationFn: (id) => fetch(`${API_URL}/${id}`, {method: 'DELETE'}),
+    onSuccess: () =>  queryClient.invalidateQueries({queryKey: ['tasks']})
+  })
   const handleDelete = (id) => {
     dispatch(deleteTask(id))
   }
 
-  useEffect(() => {
-    dispatch(fetchTasks())
-  }, [dispatch])
+
 
   if (status === 'loading') return <p className="state-message">Loading tasks...</p>
   if (status === 'failed') return <p className="state-message">Error: {error}</p>
