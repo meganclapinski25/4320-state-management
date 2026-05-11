@@ -4,15 +4,19 @@ import { useQuery } from '@tanstack/react-query'
 
 
 function TaskItem({ task, onDelete }) {
+  
   const statusClass = `status-badge status-${task.status}`
 
+  const {data: categories =[] } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => fetch('http://localhost:3001/categories').then(res => res.json())
+  })
 
 
-  const categories = useSelector(selectAllCategories)
-  const category = Array.isArray(categories)
-    ? categories.find(c => String(c.id) === String(task.categoryId))
-    : null
-  return (
+  
+  
+  
+    return (
     <div className="task-item">
       <p className="task-title">{task.title}</p>
       {category && (
