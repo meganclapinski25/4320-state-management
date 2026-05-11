@@ -1,22 +1,22 @@
-import { useEffect } from "react"
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchCategories, selectAllCategories, deleteCategories } from '../store/categoriesSlice'
-
-
-
-
 
 
 function Sidebar(){
-    const dispatch = useDispatch()
-    const categories = useSelector(selectAllCategories)
+    
 
-    useEffect(()=>{
-        dispatch(fetchCategories())
+    const queryClient = useQueryClient()
+    
+    
+    const {data: categories =[] } = useQuery({
+      queryKey: ['categories'],
+      queryFn: () => fetch('http://localhost:3001/categories').then(res => res.json())
+    })
 
-    }, [dispatch])
-
+    const deleteMutation = useMutation({
+      mutationFn: (id) => fetch(`http://localhost:3001/categories/${id}`, {method: 'DELETE'}),
+      onSuccess: () => queryClient.invalidateQueries({queryKey:['categories']})
+    })
 
 
     const list = Array.isArray(categories) ? categories :[]
@@ -39,7 +39,7 @@ function Sidebar(){
                     <span className = "cat-name">{cat.name}</span>
                     <button
                       className="cat-remove"
-                      onClick={() => dispatch(deleteCategories(cat.id))}
+                      onClick={() => deleteMutation.mutate(cat.id)}
                     >
                       -
                     </button>
