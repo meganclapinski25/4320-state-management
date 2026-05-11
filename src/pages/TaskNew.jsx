@@ -9,11 +9,28 @@ function TaskNew() {
   const [formData, setFormData] = useState({ title: '', status: 'todo', categoryId: '' })
   const [error, setError] = useState('')
   
+  const queryClient = useQueryClient()
+
+  const { data: categories = [] } = useQuery({
+    queryKey: ['categories'],
+    queryFn: () => fetch('http://localhost:3001/categories').then(res => res.json())
+  })
+  
+ 
+  const createMutation = useMutation({
+    mutationFn: (task) => fetch('http://localhost:3001/tasks', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(task)
+    }),
+    onSuccess: () =>{
+      queryClient.invalidateQueries({queryKey: ['tasks']})
+      navigate('/tasks')
+    }
+  })
   
 
- 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  createMutation.mutate(newTask)
 
     if (formData.title.length < 3 || formData.title.length > 60) {
       setError('Title must be between 3 and 60 characters.')
@@ -76,8 +93,8 @@ function TaskNew() {
         </div>
 
         <div className="form-actions">
-          <button type="submit" className="btn-primary" disabled={status === 'loading'}>
-            {status === 'loading' ? 'Saving...' : 'Save Task'}
+          <button type="submit" className="btn-primary" disabled={createMutation.isPending}>
+            {createMutation.isPending ? 'Saving...' : 'Save Task'}
           </button>
           <button type="button" className="btn-secondary" onClick={() => navigate('/tasks')}>
             Cancel
