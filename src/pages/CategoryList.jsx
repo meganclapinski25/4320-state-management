@@ -1,25 +1,39 @@
-import { Link } from 'react-router-dom'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchCategories, createCategory, deleteCategories, selectAllCategories } from '../store/categoriesSlice'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { PALETTE } from '../utils/palette'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+
+
+const API_URL = 'http://localhost:3001/categories'
 
 
 function CategoryList(){
-    const categories = useSelector(selectAllCategories)
-    const dispatch = useDispatch()
-    const status = useSelector((state) => state.categories.status)
-    const error = useSelector((state) => state.categories.error)
+   const queryClient = useQueryClient()
 
 
     const [name, setName] = useState('')
 
+    const { data: categories = [], isLoading, isError, error } = useQuery({
+      queryKey: ['categories'],
+      queryFn: () => fetch(API_URL).then(res => res.json())
+    })
 
-    useEffect(() =>{
-        dispatch(fetchCategories())
-    }, [dispatch])
+    const createMutation = useMutation({
+      mutationFn: (category) => fetch(API_URL,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(category)
+      }),
+      onSuccess: () =>{
+        queryClient.invalidateQueries({queryKey: ['categories']})
+        setName('')
+      }
+    })
 
+    const deleteMutation = useMutation({
+      mutationFn: (id) => fetch(`${API_URL}/${id}`, {method: 'DELETE'}),
+      onSuccess: () => queryClient.invalidateQueries({queryKey: ['categories']})
+    })
+    
 
     const handleCreate = async () =>{
         // pick a random color from the palette, preferring ones not already in use
@@ -32,9 +46,7 @@ function CategoryList(){
         setName('')
     }
 
-    const handleDelete = async(id) =>{
-        await dispatch(deleteCategories(id))
-    }
+    
     if (status === 'loading') return <p>Loading...</p>
     if (status === 'failed') return <p>Error: {error}</p>
     if (!Array.isArray(categories)) return <p>Loading...</p>
