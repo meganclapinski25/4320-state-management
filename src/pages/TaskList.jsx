@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import TaskItem from '../components/TaskItem'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
+
 import Sidebar from '../components/Sidebar'
 
 const API_URL = 'http://localhost:3001/tasks'
@@ -20,13 +20,11 @@ function TaskList() {
     onSuccess: () =>  queryClient.invalidateQueries({queryKey: ['tasks']})
   })
   const handleDelete = (id) => {
-    dispatch(deleteTask(id))
+    deleteMutation.mutate(id)
   }
 
-
-
-  if (status === 'loading') return <p className="state-message">Loading tasks...</p>
-  if (status === 'failed') return <p className="state-message">Error: {error}</p>
+  if (isLoading) return <p className='state-message'>Loading Tasks</p>
+  if(isError) return <p className='state-message'>Error : {error.message}</p>
 
   return (
     <div className="app-layout">
