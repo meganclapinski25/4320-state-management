@@ -12,7 +12,10 @@ function TaskItem({ task, onDelete }) {
     queryFn: () => fetch('http://localhost:3001/categories').then(res => res.json())
   })
 
+  
 
+
+  const category = categories.find(c => String(c.id) === String(task.categoryId))
   
   
   
