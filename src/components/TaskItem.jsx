@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
-import { selectAllCategories } from '../store/categoriesSlice'
-import { useSelector } from 'react-redux'
+import { useQuery } from '@tanstack/react-query'
+
+
+
 function TaskItem({ task, onDelete }) {
   const statusClass = `status-badge status-${task.status}`
 
