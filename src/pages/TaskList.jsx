@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom'
 import TaskItem from '../components/TaskItem'
-import { useDispatch, useSelector } from 'react-redux'
-import { deleteTask, fetchTasks, selectAllTasks } from '../store/tasksSlice'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import Sidebar from '../components/Sidebar'
 
+const API_URL = 'http://localhost:3001/tasks'
+
 function TaskList() {
-  const tasks = useSelector(selectAllTasks)
-  const dispatch = useDispatch()
-  const status = useSelector((state) => state.tasks.status)
-  const error = useSelector((state) => state.tasks.error)
+  const queryClient = useQueryClient()
 
   const handleDelete = (id) => {
     dispatch(deleteTask(id))
