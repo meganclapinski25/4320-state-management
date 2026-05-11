@@ -37,7 +37,7 @@ function TaskDetail() {
   const updateMutation = useMutation({
     mutationFn: (updatedTask) => fetch(`${TASKS_URL}/${id}`,{
       method: 'PUT',
-      header: {'Content-Type':'application/json'},
+      headers: {'Content-Type':'application/json'},
       body: JSON.stringify(updatedTask)
     }),
     onSuccess: () =>{
@@ -69,7 +69,7 @@ function TaskDetail() {
   const taskCategory = categories.find(c => String(c.id) === String(task.categoryId))
 
   const handleSave = () => {
-    updateMutation.muatate({
+    updateMutation.mutate({
       ...task,
       title: formData.title,
       status: formData.status,
