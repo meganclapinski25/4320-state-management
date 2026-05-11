@@ -16,6 +16,11 @@ function TaskDetail() {
     queryFn: () => fetch(`${TASKS_URL}/${id}`).then(res => res.json())
   })
 
+  const {data: categories = []} =useQuery({
+    queryKey: ['categories'],
+    queryFn: () => fetch(CATEGORIES_URL).then(res => res.json())
+  })
+
 
 
 
@@ -28,7 +33,7 @@ function TaskDetail() {
     categoryId: task?.categoryId || '',
   })
 
-  const categories = useSelector(selectAllCategories)
+  
 
   useEffect(() => {
     dispatch(fetchCategories())
