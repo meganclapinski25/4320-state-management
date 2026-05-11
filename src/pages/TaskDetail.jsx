@@ -33,6 +33,27 @@ function TaskDetail() {
     categoryId: task?.categoryId || '',
   })
 
+
+  const updateMutation = useMutation({
+    mutationFn: (updatedTask) => fetch(`${TASKS_URL}/${id}`,{
+      method: 'PUT',
+      header: {'Content-Type':'application/json'},
+      body: JSON.stringify(updatedTask)
+    }),
+    onSuccess: () =>{
+      queryClient.invalidateQueries({queryKey: ['tasks']})
+      setIsEditing(false)
+    }
+  })
+
+  const deleteMutation = useMutation({
+    mutationFn: () => fetch(`${TASKS_URL}/${id}`, { method: 'DELETE' }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
+      navigate('/tasks')
+    }
+  })
+
   
 
   useEffect(() => {
