@@ -41,14 +41,12 @@ function CategoryList(){
         const available = PALETTE.filter(c => !used.has(c))
         const pool = available.length > 0 ? available : PALETTE
         const color = pool[Math.floor(Math.random() * pool.length)]
-
-        await dispatch(createCategory({ name, color }))
-        setName('')
+        createMutation.mutate({name,color})
     }
 
     
-    if (status === 'loading') return <p>Loading...</p>
-    if (status === 'failed') return <p>Error: {error}</p>
+    if (isLoading) return <p>Loading...</p>
+    if (isError) return <p>Error: {error.message}</p>
     if (!Array.isArray(categories)) return <p>Loading...</p>
     return(
         <div>
@@ -60,7 +58,8 @@ function CategoryList(){
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <button className="btn-primary" onClick={handleCreate}>Add</button>
+              <button className="btn-primary" onClick={handleCreate} disabled={createMutation.isPending}>
+                {createMutation.isPending ? 'Adding...' : 'Add'}</button>
             </div>
 
             {categories.map(category => (
@@ -69,7 +68,7 @@ function CategoryList(){
                 {category.name}
               </span>
               <span style={{ flex: 1 }} />
-              <button className="delete-btn" onClick={() => handleDelete(category.id)}>
+              <button className="delete-btn" onClick={() => deleteMutation.mutate(category.id)}>
                 Delete
               </button>
             </div>
