@@ -11,6 +11,7 @@ function CategoryList(){
 
 
     const [name, setName] = useState('')
+    const [selectedColor, setSelectedColor] = useState(PALETTE[0])
 
     const { data: categories = [], isLoading, isError, error } = useQuery({
       queryKey: ['categories'],
@@ -26,6 +27,7 @@ function CategoryList(){
       onSuccess: () =>{
         queryClient.invalidateQueries({queryKey: ['categories']})
         setName('')
+        setSelectedColor(PALETTE[0])
       }
     })
 
@@ -35,13 +37,8 @@ function CategoryList(){
     })
     
 
-    const handleCreate = async () =>{
-        // pick a random color from the palette, preferring ones not already in use
-        const used = new Set(categories.map(c => c.color))
-        const available = PALETTE.filter(c => !used.has(c))
-        const pool = available.length > 0 ? available : PALETTE
-        const color = pool[Math.floor(Math.random() * pool.length)]
-        createMutation.mutate({name,color})
+    const handleCreate = () => {
+        createMutation.mutate({ name, color: selectedColor })
     }
 
     
@@ -51,15 +48,29 @@ function CategoryList(){
     return(
         <div>
             <h1>Categories</h1>
-            <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '1.5rem' }}>
-              <input
-                type="text"
-                placeholder="New category name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <button className="btn-primary" onClick={handleCreate} disabled={createMutation.isPending}>
-                {createMutation.isPending ? 'Adding...' : 'Add'}</button>
+            <div style={{ maxWidth: '480px', marginTop: '1.5rem', marginBottom: '1.5rem' }}>
+              <div style={{ display: 'flex', gap: '0.75rem', marginBottom: '0.75rem' }}>
+                <input
+                  type="text"
+                  placeholder="New category name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+                <button className="btn-primary" onClick={handleCreate} disabled={createMutation.isPending}>
+                  {createMutation.isPending ? 'Adding...' : 'Add'}
+                </button>
+              </div>
+              <div className="swatch-row">
+                {PALETTE.map(color => (
+                  <button
+                    key={color}
+                    className={`swatch${selectedColor === color ? ' selected' : ''}`}
+                    style={{ background: color }}
+                    onClick={() => setSelectedColor(color)}
+                    title={color}
+                  />
+                ))}
+              </div>
             </div>
 
             {categories.map(category => (
