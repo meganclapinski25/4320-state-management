@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import {useMutation, useQuery, useQueryClient} from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 import { createTask } from '../store/tasksSlice'
 import { fetchCategories, selectAllCategories } from '../store/categoriesSlice'
@@ -8,9 +8,10 @@ function TaskNew() {
   const navigate = useNavigate()
   const [formData, setFormData] = useState({ title: '', status: 'todo', categoryId: '' })
   const [error, setError] = useState('')
-  const dispatch = useDispatch()
-  const status = useSelector((state) => state.tasks.status)
-  const categories = useSelector(selectAllCategories)
+  
+  
+
+ 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
