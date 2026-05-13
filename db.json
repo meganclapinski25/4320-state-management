@@ -1,16 +1,5 @@
 {
   "tasks": [],
-  "categories": [
-    {
-      "name": "ACS 3340 ",
-      "color": "#ef4444",
-      "id": "Lob1t6l5vIo"
-    },
-    {
-      "name": "Acs 2230",
-      "color": "#eab308",
-      "id": "YFfVXtGpO9Y"
-    }
-  ],
+  "categories": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
